@@ -115,7 +115,7 @@ void updateSnake(){
   } else if(gameOver && (curTime - prevUpdateTime) > 1000 / (UPDATES_PER_SECOND)) {
     updateFadeOut();
       
-    if (curControl == BTN_START){
+    if (fadedOut && curControl != BTN_NONE){
       resetControl();
       startSnake();
     }

@@ -4,18 +4,40 @@
 unsigned long prevUpdateTime;
 unsigned long curTime;
 boolean gameOver;
+boolean fadedOut;
+
+//Different programs
+#define RAINBOW 1
+#define COLOR 2
+#define STARS 3
+#define VU 4
+#define DICE 5
+#define TETRIS 6
+#define SNAKE 7
+#define PONG 8
+#define BRICKS 9
+#define LED 10
+#define BUZZER 11
+#define FTW 12
 
 /*
  * all pins are declared here
  * Buttons: have to be connected to gnd and a digital I/O pin
  */
 #define FAST_LED_DATA_PIN  5
-const int buttonStart = 6;
-const int buttonLeft = 7;
-const int buttonRight = 8;
-const int buttonEnd = 9;
+const int buttonFrontLeft;
+const int buttonFrontRight;
+const int buttonRightFront;
+const int buttonLeftFront;
+const int buttonLeftBack;
+const int buttonRightBack;
+const int buttonDown;
 const int beeper = 10;
 const int brightnessPot = A0;
+
+const int buttons[] = {buttonFrontLeft, buttonFrontRight, buttonRightFront, buttonLeftFront, buttonLeftBack,
+              buttonRightBack};
+const int buttonsSize = 6;
 
 /*
  * Some defines used by the FAST_LED library
@@ -63,40 +85,40 @@ void changeSelection() {
     startSelection = false;
 
     switch(selection) {
-    case 1:
+    case RAINBOW:
       startRainbowPalette();
       break;
-    case 2:
+    case COLOR:
       startColorPalette();
       break;
-    case 3:
+    case STARS:
       startStars();  
       break;
-    case 4:
+    case VU:
       //startVUmeter();
       break;
-    case 5:
+    case DICE:
       startDice();
       break;    
-    case 6:
+    case TETRIS:
       startTetris();
       break;   
-    case 7:
+    case SNAKE:
       startSnake();
       break; 
-    case 8:
+    case PONG:
       startPong();
       break;  
-    case 9:       
+    case BRICKS:       
       startBricks();
       break;   
-    case 10:
+    case LED:
       //startLeds();
       break; 
-    case 11:
+    case BUZZER:
       //startBuzzer();
       break;   
-    case 12:
+    case FTW:
       startFtw();
       break;
     }        
@@ -105,40 +127,40 @@ void changeSelection() {
 
 void updateSelection() {
   switch(selection) {
-    case 1:
+    case RAINBOW:
       updateRainbowPalette();
       break;
-    case 2:
+    case COLOR:
       updateColorPalette();
       break;
-    case 3:
+    case STARS:
       updateStars();
       break;
-    case 4:
+    case VU:
       //updateVUmeter();
       break;
-    case 5:
+    case DICE:
       updateDice();
       break;    
-    case 6:
+    case TETRIS:
       updateTetris();
       break;   
-    case 7:
+    case SNAKE:
       updateSnake();
       break; 
-    case 8:
+    case PONG:
       updatePong();
       break;  
-    case 9:       
+    case BRICKS:       
       updateBricks();
       break;   
-    case 10:
+    case LED:
       //updateLeds();
       break; 
-    case 11:
+    case BUZZER:
       //updateBuzzer();
       break;    
-    case 12:
+    case FTW:
       updateFtw();
       break;       
   }

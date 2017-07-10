@@ -1,9 +1,12 @@
 void initInput() {
   initBluetooth();
-  setupButton(buttonStart);
-  setupButton(buttonLeft);
-  setupButton(buttonRight);
-  setupButton(buttonEnd);
+  setupButton(buttonFrontLeft);
+  setupButton(buttonFrontRight);
+  setupButton(buttonRightFront);
+  setupButton(buttonLeftFront);
+  setupButton(buttonLeftBack);
+  setupButton(buttonRightBack);
+  setupButton(buttonDown);
 
   resetControl();
   selection = FIRSTSELECTION;
@@ -11,9 +14,7 @@ void initInput() {
   startSelection = true;
 }
 
-void readInput() {
-  //resetControl();
-  
+void readInput() {  
   readButtons();
   readBluetooth();
 
@@ -25,20 +26,111 @@ void readBrightness() {
 }
 
 void readButtons() {
-  if(isButtonPressed(buttonStart)) {
-    addControl(BTN_START);
+  if(isButtonPressed(buttonDown)) {
+    selection++;
+    selectionChanged = true;
+    startSelection = true;
+  } else {
+    //every selection can have their own control for each button
+    switch(selection) {
+      case RAINBOW:
+        allButtonsStart();
+        break;
+      case COLOR:
+        allButtonsStart();
+        break;
+      case STARS:
+        allButtonsStart();
+        break;
+      case VU:
+        allButtonsStart();
+        break;
+      case DICE:
+        allButtonsStart();
+        break;    
+      case TETRIS:
+        leftDownUpRightInput();
+        break;   
+      case SNAKE:
+        leftDownUpRightInput();
+        break; 
+      case PONG:
+        pongInput();
+        break;  
+      case BRICKS:       
+        pongInput();
+        break;   
+      case LED:
+        //updateLeds();
+        break; 
+      case BUZZER:
+        //updateBuzzer();
+        break;    
+      case FTW:
+        leftDownUpRightInput();
+        break;       
+    }
   }
+}
 
-  if(isButtonPressed(buttonLeft)) {
+void allButtonsStart() {
+  uint8_t i;
+  for(i = 0; i < buttonsSize; i++) {
+     if(isButtonPressed(buttons[i])) {
+      addControl(BTN_START);
+    }
+  }
+}
+
+void pongInput() {
+  if(isButtonPressed(buttonLeftFront)) {
     addControl(BTN_LEFT);
   }
 
-  if(isButtonPressed(buttonRight)) {
+  if(isButtonPressed(buttonRightFront)) {
     addControl(BTN_RIGHT);
   }
 
-  if(isButtonPressed(buttonEnd)) {
-    addControl(BTN_EXIT);
+  if(isButtonPressed(buttonFrontRight)) {
+    addControl(BTN_START);
+  }
+
+  if(isButtonPressed(buttonFrontLeft)) {
+    addControl(BTN_START);
+  }
+
+  if(isButtonPressed(buttonRightBack)) {
+    addControl(BTN_UP);
+  }
+
+  if(isButtonPressed(buttonLeftBack)) {
+    addControl(BTN_DOWN);
+  }
+}
+
+void leftDownUpRightInput() {
+  if(isButtonPressed(buttonLeftFront)) {
+    addControl(BTN_LEFT);
+  }
+
+  if(isButtonPressed(buttonRightFront)) {
+    addControl(BTN_RIGHT);
+  }
+
+  if(isButtonPressed(buttonFrontRight)) {
+    addControl(BTN_UP);
+  }
+
+  if(isButtonPressed(buttonFrontLeft)) {
+    addControl(BTN_DOWN);
+  }
+
+  if(isButtonPressed(buttonRightBack)) {
+    addControl(BTN_START);
+  }
+
+  if(isButtonPressed(buttonLeftBack)) {
+    addControl(BTN_START);
   }
 }
 
@@ -117,9 +209,11 @@ void resetControl() {
   curControl = BTN_NONE;
 }
 
+/**
+ * it is not possible to add a control that was added before
+ */
 void addControl(char control) {
   if(control != BTN_EXIT) {
-    Serial.println("Add Control");
     for(uint8_t i = 0; i < CONTROL_COUNT; i++) {
       if(curControls[i] == BTN_NONE && curControls[i] != control) {
         curControls[i] = control;

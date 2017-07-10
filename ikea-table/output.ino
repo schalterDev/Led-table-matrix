@@ -72,14 +72,23 @@ int curColumn;
 const int ColumnDelay = 10;
 unsigned long timeLastColumn;
 const int framesNewColumn = 3;
+const int fadeOutTime = 2000; //in milliseconds
+int fadeOutStart;
 
 void startFadeOut() {
   fadeOutSelection = random(3);
   curColumn = 0;
   timeLastColumn = millis();
+  
+  fadedOut = false;
+  fadeOutStart = millis();
 }
 
 void updateFadeOut(){
+  if(millis() - fadeOutStart >= fadeOutTime) {
+    fadedOut = true;
+  }
+  
   curTime = millis();
   if(curTime - prevUpdateTime > 1000 / UPDATES_PER_SECOND) {
 

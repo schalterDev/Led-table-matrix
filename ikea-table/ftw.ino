@@ -38,19 +38,16 @@ void updateFtw() {
 
     prevUpdateTime = curTime;
   } else if(gameOver && curTime - prevUpdateTime > 1000 / (UPDATES_PER_SECOND)) {
-    //updateFadeOut();
+    updateFadeOut();
 
     showPixels();
 
     prevUpdateTime = curTime;
 
-    if(curControl == BTN_START) {
-      Serial.println("restart");
+    if(fadedOut && curControl != BTN_NONE) {
+      resetControl();
       startFtw();
-      resetControl();
-    } else if(curControl != BTN_NONE) {
-      resetControl();
-    }
+    } 
   }
 }
 
@@ -59,7 +56,7 @@ void controlFtw() {
     navigate(false);
   } else if(curControl == BTN_LEFT) {
     navigate(true);
-  } else if(curControl == BTN_DOWN) {
+  } else if(curControl == BTN_DOWN || curControl == BTN_UP) {
     insert(currentPlayer, playerInputPos);
     currentPlayer = !currentPlayer;
     playerInputPos = -1;

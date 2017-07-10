@@ -79,7 +79,7 @@ void updatePong(){
   } else if(gameOver) {
     updateFadeOut();
 
-    if (curControl == BTN_START){
+    if (fadedOut && curControl != BTN_NONE){
       resetControl();
       startPong();
     }

@@ -45,25 +45,32 @@ void updateTetris(){
     prevUpdateTime = curTime;
   } else if(gameOver && curTime - prevUpdateTime > 1000 / (UPDATES_PER_SECOND)) {
     updateFadeOut();
-
     prevUpdateTime = curTime;
+
+    if(fadedOut && curControl != BTN_NONE) {
+      resetControl();
+      startTetris();
+    }
   }
 }
 
 void playerControlActiveBrick(){  
-  switch(curControl){
-    case BTN_LEFT:
-      shiftActiveBrick(DIR_LEFT);
-      break;
-    case BTN_RIGHT:
-      shiftActiveBrick(DIR_RIGHT);
-      break;
-    case BTN_DOWN:
-      shiftActiveBrick(DIR_DOWN);
-      break;
-    case BTN_UP:
-      rotateActiveBrick();
-      break;
+  uint8_t i;
+  for(i = 0; i < CONTROL_COUNT; i++) {
+    switch(curControls[i]){
+      case BTN_LEFT:
+        shiftActiveBrick(DIR_LEFT);
+        break;
+      case BTN_RIGHT:
+        shiftActiveBrick(DIR_RIGHT);
+        break;
+      case BTN_DOWN:
+        shiftActiveBrick(DIR_DOWN);
+        break;
+      case BTN_UP:
+        rotateActiveBrick();
+        break;
+    }
   }
 
   resetControl();
