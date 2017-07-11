@@ -10,7 +10,6 @@
 #define MATH_ANIMATION 20
 boolean diceMath;
 
-int color;
 int mathAnimationCounter;
 int const animationUpdatesPerSecond = 10;
 unsigned long lastAnimationUpdate;

@@ -28,6 +28,7 @@ void readBrightness() {
 void readButtons() {
   if(isButtonPressed(buttonDown)) {
     selection++;
+    checkSelection();
     selectionChanged = true;
     startSelection = true;
   } else {
@@ -64,7 +65,7 @@ void readButtons() {
         //updateLeds();
         break; 
       case BUZZER:
-        //updateBuzzer();
+        pongInput();
         break;    
       case FTW:
         leftDownUpRightInput();
@@ -230,5 +231,13 @@ void addControl(char control) {
     Serial.println("BTN_EXIT");
   }
   
+}
+
+void checkSelection() {
+  if(selection > MAX_SELECTION) {
+    selection = 1;
+  } else if(selection <= 0) {
+    selection = MAX_SELECTION;
+  }
 }
 

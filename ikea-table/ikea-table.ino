@@ -20,6 +20,8 @@ boolean fadedOut;
 #define BUZZER 11
 #define FTW 12
 
+const uint8_t MAX_SELECTION = 12;
+
 /*
  * all pins are declared here
  * Buttons: have to be connected to gnd and a digital I/O pin
@@ -116,7 +118,7 @@ void changeSelection() {
       //startLeds();
       break; 
     case BUZZER:
-      //startBuzzer();
+      startBuzzer();
       break;   
     case FTW:
       startFtw();
@@ -158,7 +160,7 @@ void updateSelection() {
       //updateLeds();
       break; 
     case BUZZER:
-      //updateBuzzer();
+      updateBuzzer();
       break;    
     case FTW:
       updateFtw();
