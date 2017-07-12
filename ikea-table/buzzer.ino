@@ -27,6 +27,7 @@ void updateBuzzer() {
   } else if(gameOver && curTime - timeGameOver > timeToResetBuzzer) {
     //After specific time table can be reseted
     if(curControl != BTN_NONE) {
+      resetControl();
       startBuzzer();
     }
   }

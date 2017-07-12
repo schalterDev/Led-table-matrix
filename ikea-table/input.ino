@@ -69,7 +69,10 @@ void readButtons() {
         break;    
       case FTW:
         leftDownUpRightInput();
-        break;       
+        break;   
+      case SIMPLECOLOR:
+        leftRightInput();  
+        break;  
     }
   }
 }
@@ -80,6 +83,32 @@ void allButtonsStart() {
      if(isButtonPressed(buttons[i])) {
       addControl(BTN_START);
     }
+  }
+}
+
+void leftRightInput() {
+  if(isButtonPressed(buttonLeftFront)) {
+    addControl(BTN_LEFT);
+  }
+
+  if(isButtonPressed(buttonRightFront)) {
+    addControl(BTN_RIGHT);
+  }
+
+  if(isButtonPressed(buttonFrontRight)) {
+    addControl(BTN_RIGHT);
+  }
+
+  if(isButtonPressed(buttonFrontLeft)) {
+    addControl(BTN_LEFT);
+  }
+
+  if(isButtonPressed(buttonRightBack)) {
+    addControl(BTN_RIGHT);
+  }
+
+  if(isButtonPressed(buttonLeftBack)) {
+    addControl(BTN_LEFT);
   }
 }
 

@@ -19,8 +19,9 @@ boolean fadedOut;
 #define LED 10
 #define BUZZER 11
 #define FTW 12
+#define SIMPLECOLOR 13
 
-const uint8_t MAX_SELECTION = 12;
+const uint8_t MAX_SELECTION = 13;
 
 /*
  * all pins are declared here
@@ -123,6 +124,9 @@ void changeSelection() {
     case FTW:
       startFtw();
       break;
+    case SIMPLECOLOR:
+      startColor();
+      break;
     }        
   }
 }
@@ -164,7 +168,10 @@ void updateSelection() {
       break;    
     case FTW:
       updateFtw();
-      break;       
+      break;     
+    case SIMPLECOLOR:
+      updateColor();
+      break;  
   }
 }
 

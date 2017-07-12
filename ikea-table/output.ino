@@ -67,6 +67,12 @@ void dimLeds(float factor){
   }
 }
 
+void setAllPixelsColor(int color) {
+  for (int n=0; n<(FIELD_WIDTH*FIELD_HEIGHT); n++){
+    setPixel(n,color);
+  }
+}
+
 int fadeOutSelection;
 int curColumn;
 const int ColumnDelay = 10;
