@@ -27,6 +27,11 @@ void showPixels() {
 }
 
 void setTablePixel(int x, int y, int color) {
+  #ifdef ROTATE
+    x = FIELD_WIDTH - 1 - x;
+    y = FIELD_HEIGHT - 1 - y;
+  #endif
+  
   #ifdef ORIENTATION_HORIZONTAL
     setPixel(y%2 ? y*FIELD_WIDTH + ((FIELD_WIDTH-1)-x) : y*FIELD_WIDTH + x,color);
   #else
@@ -35,6 +40,11 @@ void setTablePixel(int x, int y, int color) {
 }
 
 void setTablePixelRGB(int x, int y, int r, int g, int b) {
+  #ifdef ROTATE
+    x = FIELD_HEIGHT - x;
+    y = FIELD_WIDTH - y;
+  #endif
+  
   #ifdef ORIENTATION_HORIZONTAL
     setPixelRGB(y%2 ? y*FIELD_WIDTH + ((FIELD_WIDTH-1)-x) : y*FIELD_WIDTH + x,r,g,b);
   #else

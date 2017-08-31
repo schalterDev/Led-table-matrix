@@ -1,4 +1,4 @@
-#define FIRSTSELECTION  12;
+#define FIRSTSELECTION  1;
  
  /* *** Game commonly used defines ** */
 #define  DIR_UP    1

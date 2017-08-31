@@ -1,4 +1,4 @@
-void initInput() {
+ void initInput() {
   initBluetooth();
   setupButton(buttonFrontLeft);
   setupButton(buttonFrontRight);
@@ -31,6 +31,7 @@ void readButtons() {
     checkSelection();
     selectionChanged = true;
     startSelection = true;
+    delay(400);
   } else {
     //every selection can have their own control for each button
     switch(selection) {

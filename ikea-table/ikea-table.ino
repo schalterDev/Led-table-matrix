@@ -28,13 +28,13 @@ const uint8_t MAX_SELECTION = 13;
  * Buttons: have to be connected to gnd and a digital I/O pin
  */
 #define FAST_LED_DATA_PIN  5
-const int buttonFrontLeft;
-const int buttonFrontRight;
-const int buttonRightFront;
-const int buttonLeftFront;
-const int buttonLeftBack;
-const int buttonRightBack;
-const int buttonDown;
+const int buttonFrontLeft = 25;
+const int buttonFrontRight = 24;
+const int buttonRightFront = 29;
+const int buttonLeftFront = 26;
+const int buttonLeftBack = 27;
+const int buttonRightBack = 28;
+const int buttonDown = 30;
 const int beeper = 10;
 const int brightnessPot = A0;
 
@@ -65,8 +65,15 @@ void setup() {
 }
 
 void loop() {
+  int brightnessBefore = brightness;
+  
   readInput(); //input is saved in curControls[CONTROL_COUNT] and curControl (first entry from curControls
   //selectionChanged and selection maybe changed
+
+  //Update brigthness
+  if(brightness - brightnessBefore > 5 || brightness - brightnessBefore < -5) {
+    FastLED.setBrightness(  brightness );
+  }
 
   if(selectionChanged) {
     changeSelection();

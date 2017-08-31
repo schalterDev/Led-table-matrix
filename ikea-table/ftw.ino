@@ -365,7 +365,7 @@ void checkPlayerWon() {
     count = 1;
     prev = 0;
     rowCounter = 0;
-    while(x - rowCounter >= 0 && rowCounter < FIELD_WIDTH) {
+    while(y - rowCounter >= 0 && rowCounter < FIELD_WIDTH) {
       playerAtField = fieldFtw[rowCounter][y - rowCounter];
       if(playerAtField != prev) {
         prev = playerAtField;

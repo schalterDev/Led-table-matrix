@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
-const uint8_t rxPin = 13;
-const uint8_t txPin = 12;
+const uint8_t rxPin = 12;
+const uint8_t txPin = 13;
 SoftwareSerial bluetooth(rxPin, txPin);
   
 const static int BLUETOOTH_SPEED = 9600;
@@ -43,9 +43,7 @@ static int readAnalogPin(int analogPin) {
 
 static int readAnalogPing(int analogPin, float maxValue) {
   int sensorValue = readAnalogPin(analogPin);
-  //return sensorValue * (maxValue / 1023.0);
-
-  return 255;
+  return sensorValue * (maxValue / 1023.0);
 }
  
 

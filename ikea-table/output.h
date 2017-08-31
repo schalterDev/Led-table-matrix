@@ -5,6 +5,7 @@
 #define  FIELD_HEIGHT      15
 #define  NUM_PIXELS    FIELD_WIDTH*FIELD_HEIGHT
 #define  ORIENTATION_HORIZONTAL //Rotation of table, uncomment to rotate field 90 degrees
+#define  ROTATE //Rotates field 180 degrees
 
 /* *** LED color table *** */
 #define  GREEN  0x00FF00
