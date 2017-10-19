@@ -1,9 +1,11 @@
-int curColor;
-const int colorChangeFaktor = 10;
+const int colorChangeFaktor = 3;
+
+int hsvH = 0;
+int hsvS = 255;
+int hsvV = 255;
 
 void startColor() {
   clearTablePixels();
-  curColor = 0XFFFFFF;
 
   colorChanged();
 }
@@ -17,6 +19,10 @@ void updateColor() {
         changeColor(true);
       } else if(curControl == BTN_RIGHT) {
         changeColor(false);
+      } else if(curControl == BTN_UP) {
+        changeS(false);
+      } else if(curControl == BTN_DOWN) {
+        changeS(true);
       }
 
       resetControl();
@@ -28,27 +34,38 @@ void updateColor() {
 
 void changeColor(bool add) {
   if(add) {
-    curColor += colorChangeFaktor;
+    hsvH += colorChangeFaktor;
   } else {
-    curColor -= colorChangeFaktor;
+    hsvH -= colorChangeFaktor;
+  }
+
+  if(hsvH > 255) {
+    hsvH -= 255;
+  } else if(hsvH < 0) {
+    hsvH += 255;
   }
 
   colorChanged();
 }
 
-void colorChanged() {
-  if(curColor > 0XFFFFFF) {
-    curColor -= 0XFFFFFF;
-  } else if (curColor < 0X000000) {
-    curColor += 0XFFFFFF;
+void changeS(bool add) {
+  if(add) {
+    hsvS += colorChangeFaktor;
+  } else {
+    hsvS -= colorChangeFaktor;
   }
-  
-  setAllPixelsColor(curColor);
+
+  if(hsvS < 0) {
+    hsvS += 255;
+  } else if(hsvS > 255) {
+    hsvS -= 255;
+  }
+
+  colorChanged();
+}
+
+void colorChanged() { 
+  setAllPixelsColor(hsvH, hsvS, hsvV);
   showPixels();
-}
-
-void setCurColor(int newColor) {
-  curColor = newColor;
-  colorChanged();
 }
 

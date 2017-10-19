@@ -14,6 +14,10 @@ void setPixelRGB(int n, int r, int g, int b) {
   leds[n] = CRGB(r,g,b);
 }
 
+void setPixelHSV(int n, int h, int s, int v) {
+  leds[n] = CHSV(h,s,v);
+}
+
 void setDelay(int duration) {
   FastLED.delay(duration);
 }
@@ -80,6 +84,12 @@ void dimLeds(float factor){
 void setAllPixelsColor(int color) {
   for (int n=0; n<(FIELD_WIDTH*FIELD_HEIGHT); n++){
     setPixel(n,color);
+  }
+}
+
+void setAllPixelsColor(int h, int s, int v) {
+  for (int n=0; n<(FIELD_WIDTH*FIELD_HEIGHT); n++){
+    setPixelHSV(n, h, s, v);
   }
 }
 

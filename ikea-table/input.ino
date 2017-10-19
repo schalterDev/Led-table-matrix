@@ -72,7 +72,7 @@ void readButtons() {
         leftDownUpRightInput();
         break;   
       case SIMPLECOLOR:
-        leftRightInput();  
+        leftDownUpRightInput();  
         break;  
     }
   }
