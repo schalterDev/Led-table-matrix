@@ -126,21 +126,33 @@ void updateSnake(){
 
 /* Set direction from current button state */
 void setDirection(){
+  //you can not move right if you are moving left
+  //you can not move up if youo are moving down
   switch(curControl){
     case BTN_LEFT:
-      dir = DIR_RIGHT;
+      if(dir != DIR_LEFT) {
+        dir = DIR_RIGHT;
+      }
       break;
     case BTN_RIGHT:
-      dir = DIR_LEFT;
+      if(dir != DIR_RIGHT) {
+        dir = DIR_LEFT;
+      }
       break;
     case BTN_DOWN:
-      dir = DIR_DOWN;
+      if(dir != DIR_UP) {
+        dir = DIR_DOWN;
+      }
       break;
     case BTN_UP:
-      dir = DIR_UP;
+      if(dir != DIR_DOWN) {
+        dir = DIR_UP;
+      }
       break;
     case BTN_START:
-      startSnake();
+      if(dir =! DIR_UP) {
+        startSnake();
+      }
       break;
   }
 
