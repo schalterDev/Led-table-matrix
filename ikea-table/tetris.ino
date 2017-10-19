@@ -56,19 +56,24 @@ void updateTetris(){
 
 void playerControlActiveBrick(){  
   uint8_t i;
-  for(i = 0; i < CONTROL_COUNT; i++) {
+  bool moved = false;
+  for(i = 0; i < CONTROL_COUNT && !moved; i++) {
     switch(curControls[i]){
       case BTN_LEFT:
         shiftActiveBrick(DIR_LEFT);
+        moved = true;
         break;
       case BTN_RIGHT:
         shiftActiveBrick(DIR_RIGHT);
+        moved = true;
         break;
       case BTN_DOWN:
         shiftActiveBrick(DIR_DOWN);
+        moved = true;
         break;
       case BTN_UP:
         rotateActiveBrick();
+        moved = true;
         break;
     }
   }
