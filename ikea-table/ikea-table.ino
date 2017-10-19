@@ -111,6 +111,9 @@ void changeSelection() {
       break;
     case VU:
       //startVUmeter();
+      selection++;
+      selectionChanged = true;
+      startSelection = true;
       break;
     case DICE:
       startDice();
@@ -129,9 +132,15 @@ void changeSelection() {
       break;   
     case LED:
       //startLeds();
+      selection++;
+      selectionChanged = true;
+      startSelection = true;
       break; 
     case BUZZER:
-      startBuzzer();
+      //startBuzzer();
+      selection++;
+      selectionChanged = true;
+      startSelection = true;
       break;   
     case FTW:
       startFtw();
@@ -176,7 +185,7 @@ void updateSelection() {
       //updateLeds();
       break; 
     case BUZZER:
-      updateBuzzer();
+      //updateBuzzer();
       break;    
     case FTW:
       updateFtw();
