@@ -61,6 +61,7 @@ void controlFtw() {
     currentPlayer = !currentPlayer;
     playerInputPos = -1;
     navigate(true);
+    delay(500);
   }
   
   resetControl();
