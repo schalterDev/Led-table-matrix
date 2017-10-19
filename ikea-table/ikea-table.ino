@@ -74,6 +74,8 @@ void loop() {
   //use a trashhold of 5 to minimice flakering
   if(brightness - brightnessBefore > 5 || brightness - brightnessBefore < -5) {
     FastLED.setBrightness(  brightness );
+    showPixels();
+    Serial.println("Brightness");
   } else {
     brightness = brightnessBefore;
   }
