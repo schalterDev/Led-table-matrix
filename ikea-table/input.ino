@@ -131,11 +131,11 @@ void pongInput() {
   }
 
   if(isButtonPressed(buttonRightBack)) {
-    addControl(BTN_UP);
+    addControl(BTN_DOWN);
   }
 
   if(isButtonPressed(buttonLeftBack)) {
-    addControl(BTN_DOWN);
+    addControl(BTN_UP);
   }
 }
 
