@@ -1,11 +1,15 @@
 #include "ftw.h"
 
+long timeLastInsert;
+const long WAITNEXTINSERT = 1000;
+
 void startFtw() {
   gameOver = false;
   firstPlayerWon = false;
   secondPlayerWon = false;
   playerInputPos = 0;
   currentPlayer = 1;
+  timeLastInsert = 0;
 
   resetField();
 }
@@ -56,12 +60,12 @@ void controlFtw() {
     navigate(false);
   } else if(curControl == BTN_LEFT) {
     navigate(true);
-  } else if(curControl == BTN_DOWN || curControl == BTN_UP) {
+  } else if((curControl == BTN_DOWN || curControl == BTN_UP) && (millis() - timeLastInsert > WAITNEXTINSERT)) {
     insert(currentPlayer, playerInputPos);
     currentPlayer = !currentPlayer;
     playerInputPos = -1;
     navigate(true);
-    delay(500);
+    timeLastInsert = millis();
   }
   
   resetControl();
