@@ -10,32 +10,26 @@ boolean fadedOut;
 #define RAINBOW 1
 #define COLOR 2
 #define STARS 3
-#define VU 4
-#define DICE 5
-#define TETRIS 6
-#define SNAKE 7
-#define PONG 8
-#define BRICKS 9
-#define LED 10
-#define BUZZER 11
-#define SIMPLECOLOR 12
-#define BLACK 13
-#define FTW 14
+#define DICE 4
+#define TETRIS 5
+#define SNAKE 6
+#define PONG 7
+#define SIMPLECOLOR 8
 
-const uint8_t MAX_SELECTION = 13;
+const uint8_t MAX_SELECTION = 8;
 
 /*
  * all pins are declared here
  * Buttons: have to be connected to gnd and a digital I/O pin
  */
 #define FAST_LED_DATA_PIN  5
-const int buttonFrontLeft = 25;
-const int buttonFrontRight = 24;
-const int buttonRightFront = 29;
-const int buttonLeftFront = 26;
-const int buttonLeftBack = 27;
-const int buttonRightBack = 28;
-const int buttonDown = 30;
+const int buttonFrontRight = 4;
+const int buttonFrontLeft = 6;
+const int buttonLeftFront = 7;
+const int buttonLeftBack = 8;
+const int buttonRightBack = 9;
+const int buttonRightFront = 10;
+const int buttonDown = 11;
 const int beeper = 10;
 const int brightnessPot = A0;
 
@@ -52,8 +46,6 @@ uint8_t brightness = 255;
 uint8_t UPDATES_PER_SECOND = 30;
 
 void setup() {
-  Serial.begin(230400);
-
   //Init input
   initInput();
 
@@ -76,7 +68,6 @@ void loop() {
   if(brightness - brightnessBefore > 5 || brightness - brightnessBefore < -5) {
     FastLED.setBrightness(  brightness );
     showPixels();
-    Serial.println("Brightness");
   } else {
     brightness = brightnessBefore;
   }
@@ -93,7 +84,6 @@ void changeSelection() {
   if(curControl == BTN_START) {
     startSelection = true;
     resetControl();
-    Serial.println("Start selection");
   }
   
   if(startSelection) {
@@ -110,12 +100,6 @@ void changeSelection() {
     case STARS:
       startStars();  
       break;
-    case VU:
-      //startVUmeter();
-      selection++;
-      selectionChanged = true;
-      startSelection = true;
-      break;
     case DICE:
       startDice();
       break;    
@@ -127,30 +111,9 @@ void changeSelection() {
       break; 
     case PONG:
       startPong();
-      break;  
-    case BRICKS:       
-      startBricks();
-      break;   
-    case LED:
-      //startLeds();
-      selection++;
-      selectionChanged = true;
-      startSelection = true;
-      break; 
-    case BUZZER:
-      //startBuzzer();
-      selection++;
-      selectionChanged = true;
-      startSelection = true;
-      break;   
-    case FTW:
-      startFtw();
-      break;
+      break;       
     case SIMPLECOLOR:
       startColor();
-      break;
-    case BLACK:
-      startBlack();
       break;
     }        
   }
@@ -167,9 +130,6 @@ void updateSelection() {
     case STARS:
       updateStars();
       break;
-    case VU:
-      //updateVUmeter();
-      break;
     case DICE:
       updateDice();
       break;    
@@ -181,19 +141,7 @@ void updateSelection() {
       break; 
     case PONG:
       updatePong();
-      break;  
-    case BRICKS:       
-      updateBricks();
-      break;   
-    case LED:
-      //updateLeds();
       break; 
-    case BUZZER:
-      //updateBuzzer();
-      break;    
-    case FTW:
-      updateFtw();
-      break;     
     case SIMPLECOLOR:
       updateColor();
       break;  
